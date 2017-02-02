@@ -40,14 +40,14 @@ Colors can be changed by pressing numbers from 0 to 9 where:<br />
 * Change the lighting size by +-1 with 'n'
 
 ## ---- TODO ----
-[ ] Better html
-[X] Make 2d blocks grid
-[X] Make various colors and automatic changing color mode
-[ ] Check what color a block is by clicking on it
-[X] Make auto mode 1 (diagonal)
-[X] Make random mode
-[X] Make pause mode
-[ ] Make auto mode 2 (circles)
-[ ] Make following mouse mode
-[X] Make various variables
-[ ] Make blocks size variable
+- [ ] Better html
+- [x] Make 2d blocks grid
+- [x] Make various colors and automatic changing color mode
+- [ ] Check what color a block is by clicking on it
+- [x] Make auto mode 1 (diagonal)
+- [x] Make random mode
+- [x] Make pause mode
+- [ ] Make auto mode 2 (circles)
+- [ ] Make following mouse mode
+- [x] Make various variables
+- [ ] Make blocks size variable
