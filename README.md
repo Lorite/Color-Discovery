@@ -3,22 +3,23 @@
 *Inspired by https://twitter.com/archillect/status/819267658831056907*
 
 ## ---- Colors ----
-Colors can be changed by pressing numbers from 0 to 9 where:
-0. random color
-1. gold
-2. silver
-3. bronze
-4. diamond
-5. emerald
-6. ruby
-7. sapphire
-9. change color mode
+Colors can be changed by pressing numbers from 0 to 9 where:<br />
+0: random color<br />
+1: gold<br />
+2: silver<br />
+3: bronze<br />
+4: diamond<br />
+5: emerald<br />
+6: ruby<br />
+7: sapphire<br />
+8: amethyst<br />
+9: automatically change color mode
 
 ## ---- Modes ----
 *Default mode is set to default mode. In this mode all blocks light up at the same time*
 * Set default mode with 'q'
 * Set auto mode 1 with 'w'
-* Set auto mode 1 with 'e'
+* Set auto mode 2 with 'e'
 * Set following mouse mode with 'i'
 * Set random mode with 'o'
 * Set pause/unpause with 'p'
@@ -37,3 +38,16 @@ Colors can be changed by pressing numbers from 0 to 9 where:
 * Change the number of vertical blocks by +1 with 'v'
 * Change how fast the blocks change color by +-0.2 with 'b'
 * Change the lighting size by +-1 with 'n'
+
+## ---- TODO ----
+[ ] Better html
+[X] Make 2d blocks grid
+[X] Make various colors and automatic changing color mode
+[ ] Check what color a block is by clicking on it
+[X] Make auto mode 1 (diagonal)
+[X] Make random mode
+[X] Make pause mode
+[ ] Make auto mode 2 (circles)
+[ ] Make following mouse mode
+[X] Make various variables
+[ ] Make blocks size variable
