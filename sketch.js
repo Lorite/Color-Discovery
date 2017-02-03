@@ -1,4 +1,16 @@
+// UI
+var titleLabel;
+var authorLabel;
 var canvas; // canvas
+var canvasWidthLabel; // canvasWidth
+var canvasWidthInput;
+var canvasWidthPlusButton;
+var canvasWidthMinusButton;
+var canvasHeightLabel; // canvasHeight
+var canvasHeightInput;
+var canvasHeightPlusButton;
+var canvasHeightMinusButton;
+
 var mode = 'default'; // current mode
 var previousMode; // previous mode
 var blocks; // blocks 2d grid
@@ -14,12 +26,19 @@ var defaultColorHue = 0; // hue value between 0 and 360
 var defaultColorSaturation = 0; // saturation value between 0 and 100
 
 function setup() {
-  // create canvas
-  canvas = createCanvas(720, 420);
-  // create blocks
-  createBlocks();
-  // set default color Mode
-  colorMode(HSB, 360, 100, 100, 1)
+  // UI
+  titleLabel = createElement('h1', 'Color Discovery');
+  authorLabel = createElement('h2', 'Created by Alejandro Lorite');
+  canvas = createCanvas(720, 420); // create canvas
+  canvasWidthLabel = createLabel(); // canvasWidth
+  canvasWidthInput = createInput();
+  canvasWidthPlusButton = createButton("+");
+  canvasWidthPlusButton.mousePressed(function() {;});
+  canvasWidthMinusButton = createButton("-");
+
+  // code
+  createBlocks(); // create blocks
+  colorMode(HSB, 360, 100, 100, 1) // set default color Mode
   noStroke();
 }
 
