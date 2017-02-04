@@ -395,7 +395,7 @@ function changeColourMode() {
 
 function updateCanvasWidth(dx) {
 	canvasWidth += dx;
-	if (canvasWidth < -dx)
+	if (canvasWidth < 0)
 		canvasWidth = 0;
 	canvasWidthInput.value(canvasWidth);
 	canvas = createCanvas(canvasWidth, canvasHeight);
@@ -403,7 +403,7 @@ function updateCanvasWidth(dx) {
 
 function updateCanvasHeight(dy) {
 	canvasHeight += dy;
-	if (canvasHeight < -dy)
+	if (canvasHeight < 0)
 		canvasHeight = 0;
 	canvasHeightInput.value(canvasHeight);
 	canvas = createCanvas(canvasWidth, canvasHeight);
@@ -411,24 +411,22 @@ function updateCanvasHeight(dy) {
 
 function updateHorizontalBlocks(dx) {
 	horizontalBlocks += dx;
-	if (horizontalBlocks < -dx)
-		horizontalBlocks = -dx;
+	if (horizontalBlocks < 1)
+		horizontalBlocks = 1;
 	horizontalBlocksInput.value(horizontalBlocks);
 	createBlocks();
 }
 
 function updateVerticalBlocks(dy) {
 	verticalBlocks += dy;
-	if (verticalBlocks < -dy)
-		verticalBlocks = -dy;
+	if (verticalBlocks < 1)
+		verticalBlocks = 1;
 	verticalBlocksInput.value(verticalBlocks);
 	createBlocks();
 }
 
 function updateSpeed(dx) {
 	speed += dx;
-	if (speed < -dx)
-		speed = -dx;
 	speedInput.value(speed);
 }
 
