@@ -31,9 +31,15 @@ function setup() {
   // UI
   titleLabel = createElement('h1', 'Color Discovery');
   authorLabel = createElement('h2', 'Created by Alejandro Lorite');
+
   canvas = createCanvas(canvasWidth, canvasHeight); // create canvas
+
   canvasWidthLabel = createP('Canvas Width:'); // canvasWidth
   canvasWidthInput = createInput(canvasWidth);
+  canvasWidthInput.changed(function() {
+  	if (!isNaN(canvasWidthInput.value()))
+  		updateCanvasWidth(int(canvasWidthInput.value()) - canvas.width)
+  });
   canvasWidthPlusButton = createButton("+");
   canvasWidthPlusButton.mousePressed(function() {
   	updateCanvasWidth(5);
@@ -42,8 +48,13 @@ function setup() {
   canvasWidthMinusButton.mousePressed(function() {
   	updateCanvasWidth(-5);
   });
+
   canvasHeightLabel = createP('Canvas Height:'); // canvasHeight
   canvasHeightInput = createInput(canvasHeight);
+  canvasHeightInput.changed(function() {
+  	if (!isNaN(canvasHeightInput.value()))
+  		updateCanvasHeight(int(canvasHeightInput.value()) - canvas.height)
+  });
   canvasHeightPlusButton = createButton("+");
   canvasHeightPlusButton.mousePressed(function() {
   	updateCanvasHeight(5);
