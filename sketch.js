@@ -2,6 +2,8 @@
 var titleLabel;
 var authorLabel;
 var canvas; // canvas
+var canvasWidth = 720;
+var canvasHeight = 420;
 var canvasWidthLabel; // canvasWidth
 var canvasWidthInput;
 var canvasWidthPlusButton;
@@ -29,12 +31,27 @@ function setup() {
   // UI
   titleLabel = createElement('h1', 'Color Discovery');
   authorLabel = createElement('h2', 'Created by Alejandro Lorite');
-  canvas = createCanvas(720, 420); // create canvas
-  canvasWidthLabel = createLabel(); // canvasWidth
-  canvasWidthInput = createInput();
+  canvas = createCanvas(canvasWidth, canvasHeight); // create canvas
+  canvasWidthLabel = createP('Canvas Width:'); // canvasWidth
+  canvasWidthInput = createInput(canvasWidth);
   canvasWidthPlusButton = createButton("+");
-  canvasWidthPlusButton.mousePressed(function() {;});
+  canvasWidthPlusButton.mousePressed(function() {
+  	updateCanvasWidth(5);
+  });
   canvasWidthMinusButton = createButton("-");
+  canvasWidthMinusButton.mousePressed(function() {
+  	updateCanvasWidth(-5);
+  });
+  canvasHeightLabel = createP('Canvas Height:'); // canvasHeight
+  canvasHeightInput = createInput(canvasHeight);
+  canvasHeightPlusButton = createButton("+");
+  canvasHeightPlusButton.mousePressed(function() {
+  	updateCanvasHeight(5);
+  });
+  canvasHeightMinusButton = createButton("-");
+  canvasHeightMinusButton.mousePressed(function() {
+  	updateCanvasHeight(-5);
+  });
 
   // code
   createBlocks(); // create blocks
@@ -96,17 +113,10 @@ function mouseWheel(event) {
   // variable changing (scrolling up is positive and scrolling down is negative)
   switch (key) {
   	case 'z': // updates canvas width +-5
-  		if (canvas.width < event.delta/20)
-  			canvas = createCanvas(0, height);
-  		else
-  			canvas = createCanvas(width-(event.delta/20), height);
+  		updateCanvasWidth(-event.delta/20);
   		break;
   	case 'x': // updates canvas height by +-5
-  		if (canvas.height < event.delta/20)
-  			canvas = createCanvas(width, 0);
-  		else
-				canvas = createCanvas(width, height-(event.delta/20));
-  		break;
+  		updateCanvasHeight(-event.delta/20);
   	case 'c': // updates the number of horizontal blocks by +-1
   		if (horizontalBlocks <= event.delta/100)
   			horizontalBlocks = 1;
@@ -252,4 +262,20 @@ function setColor(hue, saturation) {
 	colourMode = 'default';
 	defaultColorHue = hue; // hue value between 0 and 360
   defaultColorSaturation = saturation; // saturation value between 0 and 100
+}
+
+function updateCanvasWidth(dx) {
+	canvasWidth += dx;
+	if (canvasWidth < -dx)
+		canvasWidth = 0;
+	canvasWidthInput.value(canvasWidth);
+	canvas = createCanvas(canvasWidth, canvasHeight);
+}
+
+function updateCanvasHeight(dy) {
+	canvasHeight += dy;
+	if (canvasHeight < -dy)
+		canvasHeight = 0;
+	canvasHeightInput.value(canvasHeight);
+	canvas = createCanvas(canvasWidth, canvasHeight);
 }
