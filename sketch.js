@@ -12,6 +12,12 @@ var canvasHeightLabel; // canvasHeight
 var canvasHeightInput;
 var canvasHeightPlusButton;
 var canvasHeightMinusButton;
+var modeLabel; // mode
+var modeSelect;
+var colourLabel; // colour
+var colourSelect;
+var colourModeLabel; // colour mode
+var colourModeButton;
 
 var mode = 'default'; // current mode
 var previousMode; // previous mode
@@ -32,9 +38,19 @@ function setup() {
   titleLabel = createElement('h1', 'Color Discovery');
   authorLabel = createElement('h2', 'Created by Alejandro Lorite');
 
-  canvas = createCanvas(canvasWidth, canvasHeight); // create canvas
+  modeLabel = createP('Mode:'); // mode
+	modeSelect = createSelect();
 
-  canvasWidthLabel = createP('Canvas Width:'); // canvasWidth
+	colourLabel = createP('Color:'); // colour
+	colourSelect = createSelect();
+
+	colourModeLabel = createP('Color Mode:'); // colour mode
+	colourModeButton = createButton(colourMode);
+	colourModeButton.mousePressed(function() {
+		changeColourMode();
+	});
+
+	canvasWidthLabel = createP('Canvas Width:'); // canvasWidth
   canvasWidthInput = createInput(canvasWidth);
   canvasWidthInput.changed(function() {
   	if (!isNaN(canvasWidthInput.value()))
@@ -63,6 +79,8 @@ function setup() {
   canvasHeightMinusButton.mousePressed(function() {
   	updateCanvasHeight(-5);
   });
+
+  canvas = createCanvas(canvasWidth, canvasHeight); // create canvas
 
   // code
   createBlocks(); // create blocks
@@ -153,10 +171,10 @@ function mouseWheel(event) {
 }
 
 function keyTyped() {
-	print("typed " + int(key) + " " + keyCode);	// I realised arrow keys can't be detected :(
+	print("typed " + key + " " + keyCode);	// I realised arrow keys can't be detected :(
 
 	// modes
-	switch (key) {
+	switch (key.toLowerCase()) {
 	  case 'q': // set mode to normal where all blocks light up at the same time
 	  	mode = 'default';
 	  	updateBlocks();
@@ -219,12 +237,7 @@ function keyTyped() {
 	  	setColor(270, 50);
 	    break;
 	  case 9: // set mode to random changing color
-	  	if (colourMode == 'default') {
-	  		colourMode = 'random';
-	  	} else if (colourMode == 'random') {
-	  		colourMode = 'default';
-	  	}
-	  	print('Color mode: ' + colourMode);
+	  	changeColourMode();
 	    break;
   }
 }
@@ -270,9 +283,18 @@ function updateBrightness() {
 }
 
 function setColor(hue, saturation) {
-	colourMode = 'default';
 	defaultColorHue = hue; // hue value between 0 and 360
   defaultColorSaturation = saturation; // saturation value between 0 and 100
+}
+
+function changeColourMode() {
+	if (colourMode == 'default') {
+		colourMode = 'random';
+	} else if (colourMode == 'random') {
+		colourMode = 'default';
+	}
+	print('Color mode: ' + colourMode);
+	colourModeButton.html(colourMode);
 }
 
 function updateCanvasWidth(dx) {
