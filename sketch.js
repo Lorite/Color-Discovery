@@ -40,9 +40,31 @@ function setup() {
 
   modeLabel = createP('Mode:'); // mode
 	modeSelect = createSelect();
+	modeSelect.option('default');
+	modeSelect.option('diagonal');
+	modeSelect.option('circles');
+	modeSelect.option('random');
+	modeSelect.option('paused');
+	modeSelect.changed(function() {
+		mode = modeSelect.value();
+		updateBlocks();
+	});
 
 	colourLabel = createP('Color:'); // colour
 	colourSelect = createSelect();
+	colourSelect.option('random');
+	colourSelect.option('gold');
+	colourSelect.option('silver');
+	colourSelect.option('bronze');
+	colourSelect.option('diamond');
+	colourSelect.option('emerald');
+	colourSelect.option('ruby');
+	colourSelect.option('sapphire');
+	colourSelect.option('amethyst');
+	colourSelect.changed(function() {
+		changeColor(colourSelect.elt.selectedIndex);
+		print(colourSelect.elt.selectedIndex);
+	});
 
 	colourModeLabel = createP('Color Mode:'); // colour mode
 	colourModeButton = createButton(colourMode);
@@ -208,38 +230,10 @@ function keyTyped() {
 	print('Mode: ' + mode);
 
   // colors
-  switch (int(key)) { 
-  	case 0: // random color
-  		setColor(random(0,360), random(0, 100));
-	    break;
-  	case 1: // gold
-  		setColor(46, 78);
-	    break;
-   	case 2: // silver
-   		setColor(0, 0);
-	    break;
-	  case 3: // bronze
-	  	setColor(29.8, 75.6);
-	    break;
-	  case 4: // diamond
-	  	setColor(191.143, 27.5);
-	    break;
-	  case 5: // emerald
-	  	setColor(140, 60);
-	    break;
-	  case 6: // ruby
-	  	setColor(337.4, 92.4);
-	    break;
-	  case 7: // sapphire
-	  	setColor(216.5, 91.9);
-	    break;
-	  case 8: // amethyst
-	  	setColor(270, 50);
-	    break;
-	  case 9: // set mode to random changing color
-	  	changeColourMode();
-	    break;
-  }
+  if (!isNaN(key) && int (key) != 9)
+  	changeColor(int(key));
+  else if (!isNaN(key) && int (key) == 9)
+  	changeColourMode();
 }
 
 function createBlocks() {
@@ -279,6 +273,38 @@ function updateBrightness() {
         blocks[x][y] += 200;
       }
     }
+  }
+}
+
+function changeColor(number) {
+	switch(number) {
+		case 0: // random color
+			setColor(random(0,360), random(0, 100));
+	    break;
+		case 1: // gold
+			setColor(46, 78);
+	    break;
+	 	case 2: // silver
+	 		setColor(0, 0);
+	    break;
+	  case 3: // bronze
+	  	setColor(29.8, 75.6);
+	    break;
+	  case 4: // diamond
+	  	setColor(191.143, 27.5);
+	    break;
+	  case 5: // emerald
+	  	setColor(140, 60);
+	    break;
+	  case 6: // ruby
+	  	setColor(337.4, 92.4);
+	    break;
+	  case 7: // sapphire
+	  	setColor(216.5, 91.9);
+	    break;
+	  case 8: // amethyst
+	  	setColor(270, 50);
+	    break;
   }
 }
 
