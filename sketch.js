@@ -20,6 +20,14 @@ var verticalBlocksLabel; // verticalBlocks
 var verticalBlocksInput;
 var verticalBlocksPlusButton;
 var verticalBlocksMinusButton;
+var speedLabel; // speed
+var speedInput;
+var speedPlusButton;
+var speedMinusButton;
+var lightingSizeLabel; // lightingSize
+var lightingSizeInput;
+var lightingSizePlusButton;
+var lightingSizeMinusButton;
 var modeLabel; // mode
 var modeSelect;
 var colourLabel; // colour
@@ -141,6 +149,36 @@ function setup() {
   	updateVerticalBlocks(-1);
   });
 
+  speedLabel = createP('Speed:'); // speed
+  speedInput = createInput(speed);
+  speedInput.changed(function() {
+  	if (!isNaN(speedInput.value()))
+  		updateSpeed(int(speedInput.value()) - speed)
+  });
+  speedPlusButton = createButton("+");
+  speedPlusButton.mousePressed(function() {
+  	updateSpeed(0.1);
+  });
+  speedMinusButton = createButton("-");
+  speedMinusButton.mousePressed(function() {
+  	updateSpeed(-0.1);
+  });
+
+  lightingSizeLabel = createP('Lighting Size:'); // lightingSize
+  lightingSizeInput = createInput(lightingSize);
+  lightingSizeInput.changed(function() {
+  	if (!isNaN(lightingSizeInput.value()))
+  		updateLightingSize(int(lightingSizeInput.value()) - lightingSize)
+  });
+  lightingSizePlusButton = createButton("+");
+  lightingSizePlusButton.mousePressed(function() {
+  	updateLightingSize(1);
+  });
+  lightingSizeMinusButton = createButton("-");
+  lightingSizeMinusButton.mousePressed(function() {
+  	updateLightingSize(-1);
+  });
+
   canvas = createCanvas(canvasWidth, canvasHeight); // create canvas
 
   // code
@@ -214,11 +252,10 @@ function mouseWheel(event) {
   		updateVerticalBlocks(-event.delta/100);
   		break;
   	case 'b': // updates how fast the blocks change color by +-0.1
-  		speed -= (event.delta/1000);
+  		updateSpeed(-event.delta/1000);
   		break;
   	case 'n': // updates the lighting size by +-1
-  		lightingSize -= (event.delta/100);
-  		createBlocks();
+  		updateLightingSize(-event.delta/100);
   		break;
   } 
 }
@@ -375,7 +412,7 @@ function updateCanvasHeight(dy) {
 function updateHorizontalBlocks(dx) {
 	horizontalBlocks += dx;
 	if (horizontalBlocks < -dx)
-		horizontalBlocks = 1;
+		horizontalBlocks = -dx;
 	horizontalBlocksInput.value(horizontalBlocks);
 	createBlocks();
 }
@@ -383,7 +420,20 @@ function updateHorizontalBlocks(dx) {
 function updateVerticalBlocks(dy) {
 	verticalBlocks += dy;
 	if (verticalBlocks < -dy)
-		verticalBlocks = 1;
+		verticalBlocks = -dy;
 	verticalBlocksInput.value(verticalBlocks);
+	createBlocks();
+}
+
+function updateSpeed(dx) {
+	speed += dx;
+	if (speed < -dx)
+		speed = -dx;
+	speedInput.value(speed);
+}
+
+function updateLightingSize(dx) {
+	lightingSize += dx;
+	lightingSizeInput.value(lightingSize);
 	createBlocks();
 }
