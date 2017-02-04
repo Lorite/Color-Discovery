@@ -12,6 +12,14 @@ var canvasHeightLabel; // canvasHeight
 var canvasHeightInput;
 var canvasHeightPlusButton;
 var canvasHeightMinusButton;
+var horizontalBlocksLabel; // horizontalBlocks
+var horizontalBlocksInput;
+var horizontalBlocksPlusButton;
+var horizontalBlocksMinusButton;
+var verticalBlocksLabel; // verticalBlocks
+var verticalBlocksInput;
+var verticalBlocksPlusButton;
+var verticalBlocksMinusButton;
 var modeLabel; // mode
 var modeSelect;
 var colourLabel; // colour
@@ -102,6 +110,36 @@ function setup() {
   	updateCanvasHeight(-5);
   });
 
+  horizontalBlocksLabel = createP('Horizontal Blocks:'); // horizontalBlocks
+  horizontalBlocksInput = createInput(horizontalBlocks);
+  horizontalBlocksInput.changed(function() {
+  	if (!isNaN(horizontalBlocksInput.value()))
+  		updateHorizontalBlocks(int(horizontalBlocksInput.value()) - horizontalBlocks)
+  });
+  horizontalBlocksPlusButton = createButton("+");
+  horizontalBlocksPlusButton.mousePressed(function() {
+  	updateHorizontalBlocks(1);
+  });
+  horizontalBlocksMinusButton = createButton("-");
+  horizontalBlocksMinusButton.mousePressed(function() {
+  	updateHorizontalBlocks(-1);
+  });
+
+  verticalBlocksLabel = createP('Vertical Blocks:'); // verticalBlocks
+  verticalBlocksInput = createInput(verticalBlocks);
+  verticalBlocksInput.changed(function() {
+  	if (!isNaN(verticalBlocksInput.value()))
+  		updateVerticalBlocks(int(verticalBlocksInput.value()) - verticalBlocks)
+  });
+  verticalBlocksPlusButton = createButton("+");
+  verticalBlocksPlusButton.mousePressed(function() {
+  	updateVerticalBlocks(1);
+  });
+  verticalBlocksMinusButton = createButton("-");
+  verticalBlocksMinusButton.mousePressed(function() {
+  	updateVerticalBlocks(-1);
+  });
+
   canvas = createCanvas(canvasWidth, canvasHeight); // create canvas
 
   // code
@@ -169,11 +207,7 @@ function mouseWheel(event) {
   	case 'x': // updates canvas height by +-5
   		updateCanvasHeight(-event.delta/20);
   	case 'c': // updates the number of horizontal blocks by +-1
-  		if (horizontalBlocks <= event.delta/100)
-  			horizontalBlocks = 1;
-  		else
-				horizontalBlocks -= event.delta/100;
-  		createBlocks();
+  		updateHorizontalBlocks(-event.delta/100);
   		break;
   	case 'v': // updates the number of vertical blocks by +-1
   		if (verticalBlocks <= event.delta/100)
@@ -337,4 +371,20 @@ function updateCanvasHeight(dy) {
 		canvasHeight = 0;
 	canvasHeightInput.value(canvasHeight);
 	canvas = createCanvas(canvasWidth, canvasHeight);
+}
+
+function updateHorizontalBlocks(dx) {
+	horizontalBlocks += dx;
+	if (horizontalBlocks < -dx)
+		horizontalBlocks = 1;
+	horizontalBlocksInput.value(horizontalBlocks);
+	createBlocks();
+}
+
+function updateVerticalBlocks(dy) {
+	verticalBlocks += dy;
+	if (verticalBlocks < -dy)
+		verticalBlocks = 1;
+	verticalBlocksInput.value(verticalBlocks);
+	createBlocks();
 }
