@@ -51,6 +51,7 @@ function setup() {
 	modeSelect.option('default');
 	modeSelect.option('diagonal');
 	modeSelect.option('circles');
+	modeSelect.option('mouse');
 	modeSelect.option('random');
 	modeSelect.option('paused');
 	modeSelect.changed(function() {
@@ -210,11 +211,7 @@ function mouseWheel(event) {
   		updateHorizontalBlocks(-event.delta/100);
   		break;
   	case 'v': // updates the number of vertical blocks by +-1
-  		if (verticalBlocks <= event.delta/100)
-  			verticalBlocks = 1;
-  		else
-				verticalBlocks -= event.delta/100;
-  		createBlocks();
+  		updateVerticalBlocks(-event.delta/100);
   		break;
   	case 'b': // updates how fast the blocks change color by +-0.1
   		speed -= (event.delta/1000);
@@ -261,6 +258,7 @@ function keyTyped() {
 	    }
 	   	break;
 	}
+	modeSelect.elt.value = mode;
 	print('Mode: ' + mode);
 
   // colors
@@ -340,6 +338,7 @@ function changeColor(number) {
 	  	setColor(270, 50);
 	    break;
   }
+  colourSelect.elt.selectedIndex = number;
 }
 
 function setColor(hue, saturation) {
