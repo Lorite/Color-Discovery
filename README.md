@@ -1,5 +1,7 @@
 # Color-Discovery
 
+Try it at lorite.github.io/Color-Discovery/
+
 *Inspired by https://twitter.com/archillect/status/819267658831056907*
 
 ## ---- Colors ----
